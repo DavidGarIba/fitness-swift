@@ -22,6 +22,8 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
     
     let locationManager = CLLocationManager()
     var temp: Float?
+    let lattitude: Double?
+    let Longtitude: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +59,8 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
         if segue.identifier == "goToNextPage"
         {
          let destination = segue.destination as! FourScreen
-        // destination.userEmail = emailTextField.text
+        destination.userLatitude = lattitude
+        destination.userLongitude = Longtitude
         }
     }
     
@@ -352,6 +355,9 @@ extension ThirdScreen: CLLocationManagerDelegate{
            if let location = locations.last{
                let latitude = location.coordinate.latitude
                let longitude = location.coordinate.longitude
+               latitude = self.lattitude
+               longitude = self.Longtitude
+               
                 print("LattLng: (\(latitude),\(longitude))")
                 getlocation(lat: latitude, lon: longitude)
             }

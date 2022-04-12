@@ -23,7 +23,9 @@ class SecondScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print(dataPath)
+        
         tableView.dataSource = self
         tableView.delegate = self
         addDataToItems()
