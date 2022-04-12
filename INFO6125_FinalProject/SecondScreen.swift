@@ -24,7 +24,7 @@ class SecondScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(dataPath)
+        //print(dataPath)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -38,14 +38,15 @@ class SecondScreen: UIViewController {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
+            self.performSegue(withIdentifier: "goBack", sender: self)
         }
         catch let signOutError as NSError
         {
             print("Error signing out: %@", signOutError)
         }
-            dismiss(animated: true)
+            //dismiss(animated: true)
     }
-    
+   
     func readRecordActivity(){
         guard let RecordedFile = dataPath else{
             return
@@ -57,9 +58,11 @@ class SecondScreen: UIViewController {
             let data = try Data(contentsOf: RecordedFile)
             let decodedData = try decoder.decode([ItemToDo].self, from: data)
             
-            for activity in decodedData {
-                items.append(ItemToDo(title:"\(activity.title)" , description: "\(activity.description)"))
-            }
+//            for activity in decodedData {
+//                items.append(ItemToDo(title:"\(activity.title)" , description: "\(activity.description)"))
+//            }
+            items = decodedData
+            tableView.reloadData()
         }catch{
             print(error)
         }
@@ -104,6 +107,10 @@ class SecondScreen: UIViewController {
                 {
                 let destination = segue.destination as! ThirdScreen
                    // destination.userEmail = emailTextField.text
+                }
+                else if segue.identifier == "goBack"
+                {
+                let destination = segue.destination as! ViewController
                 }
             }
 }

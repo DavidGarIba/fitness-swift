@@ -11,13 +11,15 @@ class FourScreen: UIViewController {
         var Title: String?
         var Distance: String?
         var Duration: String?
+        var userLatitude: Double?
+    var userLongitude: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Title = "test Title"
-        Distance = "123"
-        Duration = "456"
+        Title = "test Title 1"
+        Distance = "1234"
+        Duration = "45678"
     }
     
     @IBAction func MoveButton(_ sender: UIButton) {
