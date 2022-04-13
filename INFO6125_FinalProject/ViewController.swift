@@ -23,7 +23,6 @@ class ViewController: UIViewController {
        
     }
     
-
     @IBAction func EmailTextField(_ sender: UITextField) {
         if sender.text?.isEmpty == true
         {
@@ -35,6 +34,8 @@ class ViewController: UIViewController {
             LoginButton.isEnabled = true
         }
     }
+    
+    
     @IBAction func PasswordTextField(_ sender: UITextField) {
         if sender.text?.isEmpty == true
         {
