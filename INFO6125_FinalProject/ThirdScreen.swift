@@ -59,8 +59,8 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
         if segue.identifier == "goToNextPage"
         {
          let destination = segue.destination as! FourScreen
-        destination.userLatitude = Latitude
-        destination.userLongitude = Longtitude
+        destination.userLatitude = Latitude!
+        destination.userLongitude = Longtitude!
         }
     }
     
