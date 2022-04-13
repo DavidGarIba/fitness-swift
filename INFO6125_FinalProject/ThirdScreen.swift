@@ -268,7 +268,7 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onGetLocationTapped(_ sender: UIButton) {
-        StartActivityButton.isEnabled = true
+        //StartActivityButton.isEnabled = true
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
     }
@@ -356,7 +356,10 @@ extension ThirdScreen: CLLocationManagerDelegate{
                var longitude = location.coordinate.longitude
                self.Latitude = latitude
                self.Longtitude = longitude
-               
+               if latitude.isNaN == false && longitude.isNaN == false
+               {
+                   StartActivityButton.isEnabled = true
+               }
                 print("LattLng: (\(latitude),\(longitude))")
                 getlocation(lat: latitude, lon: longitude)
             }

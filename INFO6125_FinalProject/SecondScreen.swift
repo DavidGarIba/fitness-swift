@@ -69,7 +69,15 @@ class SecondScreen: UIViewController {
         }
     }
 
-    
+    func addDataToPropertyList(){
+        let encoder = PropertyListEncoder()
+        do{
+            let data = try encoder.encode(items)
+            try data.write(to: dataPath!)
+        }catch{
+            print(error)
+        }
+    }
     
     func addDataToItems(){
         guard let newTitle = Title else {
@@ -81,21 +89,13 @@ class SecondScreen: UIViewController {
         guard let newDuration = Duration else {
             return
         }
-        let encoder = PropertyListEncoder()
-        
         if Duration != nil && Distance != nil && Title != nil
         {
             items.append(ItemToDo(title:"\(newTitle)", description: "The archived road is \(newDistance)" + " " + "in duration is \(newDuration)"))
             Distance = nil
             Duration = nil
             Title = nil
-            
-            do{
-                let data = try encoder.encode(items)
-                try data.write(to: dataPath!)
-            }catch{
-                print(error)
-            }
+            addDataToPropertyList()
         }
     }
     
@@ -143,19 +143,26 @@ extension SecondScreen: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let isChecked = tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark
         if (isChecked) {
+            
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
         } else {
             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            removeItem(at: indexPath)
+            
         }
     }
     private func removeItem(at indexPath: IndexPath) {
         let alertController = UIAlertController(title: "Remove item",
                                                 message: "Are you sure?",
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "No", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: {_ in
+            self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        }))
         alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
             self.items.remove(at: indexPath.row)
             self.tableView.reloadData()
+            self.addDataToPropertyList()
         }))
         self.present(alertController, animated: true)
     }

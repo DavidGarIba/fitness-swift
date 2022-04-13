@@ -47,7 +47,7 @@
                                             <constraint firstAttribute="width" constant="200" id="sVK-wg-kPU"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
                                         <connections>
                                             <action selector="EmailTextField:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="sFk-e4-QZa"/>
                                         </connections>
@@ -69,7 +69,7 @@
                                             <constraint firstAttribute="width" constant="200" id="MCj-lU-JDX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                         <connections>
                                             <action selector="PasswordTextField:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="7ct-Ys-bND"/>
                                         </connections>
@@ -78,13 +78,12 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2A2-K4-n4D">
                                 <rect key="frame" x="132" y="706" width="150" height="31"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="H8q-ep-Oao"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="systemGroupedBackgroundColor"/>
+                                <color key="tintColor" red="1" green="0.50729382190000005" blue="0.022357154399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Log-in" cornerStyle="capsule" titleAlignment="center"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Log-in" cornerStyle="capsule" titleAlignment="center"/>
                                 <connections>
                                     <action selector="LoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5li-Z0-yy4"/>
                                 </connections>
@@ -148,7 +147,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Recorded Activities" id="nBS-kd-M2s">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="NGx-Fy-YV8">
+                                        <barButtonItem key="leftBarButtonItem" title="Log-out" id="NGx-Fy-YV8">
                                             <color key="tintColor" red="1" green="0.50729382190000005" blue="0.022357154399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="LogoutButton:" destination="4cd-Xs-CbG" id="Xkz-45-yBa"/>
@@ -271,13 +270,12 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hM1-tW-SfA">
                                 <rect key="frame" x="132" y="766" width="150" height="31"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="EWF-mS-JQr"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="systemGroupedBackgroundColor"/>
+                                <color key="tintColor" red="1" green="0.50729382190000005" blue="0.022357154399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Start Activity" cornerStyle="capsule" titleAlignment="center"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Start Activity" cornerStyle="capsule" titleAlignment="center"/>
                                 <connections>
                                     <action selector="LoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c2P-3W-zkv"/>
                                     <action selector="startActivityButton:" destination="SvC-lr-14f" eventType="touchUpInside" id="SUv-Lq-SW7"/>
@@ -385,7 +383,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please fill ID of this Activity" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jIr-99-yAN">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please fill ID to start Activity" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jIr-99-yAN">
                                         <rect key="frame" x="0.0" y="28.5" width="384" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -460,7 +458,7 @@
                                 </constraints>
                                 <color key="tintColor" red="1" green="0.50729382190000005" blue="0.022357154399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Stop Activity"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Stop Activity" cornerStyle="capsule"/>
                                 <connections>
                                     <action selector="MoveButton:" destination="zwx-Ch-sxJ" eventType="touchUpInside" id="6yR-9H-x5V"/>
                                 </connections>
@@ -513,9 +511,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
