@@ -23,6 +23,7 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var workoutNameEdit: UITextField!
+    @IBOutlet weak var stopActivityButton: UIButton!
     
     
     let locationManager = CLLocationManager()
@@ -39,7 +40,7 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        stopActivityButton.isEnabled = false
         locationManager.requestWhenInUseAuthorization()
         
         locationManager.delegate = self
@@ -71,10 +72,22 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
         mapView.setRegion(region, animated: true)
     }
     
+    @IBAction func textfieldID(_ sender: UITextField) {
+         
+         if workoutNameEdit.hasText == false
+        {
+            stopActivityButton.isEnabled = false
+        }
+        else if workoutNameEdit.hasText == true
+        {
+            stopActivityButton.isEnabled = true
+        }
+    }
     
     @IBAction func onNameTyped(_ sender: UITextField) {
         Title = workoutNameEdit.text!
-        print(Title)
+        //print(Title)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -95,6 +108,7 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
         } else {
             print("elapsedTime:", String(format: "%.0fs", Date().timeIntervalSince(startDate)))
             durationLabel.text = String(format: "%.0fs", Date().timeIntervalSince(startDate))
+            Duration = durationLabel.text
         }
         
         if startLocation == nil {
@@ -103,7 +117,7 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
             traveledDistance += lastLocation.distance(from: location)
             distanceLabel.text = String(format: "%.0fm", traveledDistance)
             print("Traveled Distance:",  traveledDistance)
-            
+            Distance = distanceLabel.text
         }
         lastLocation = locations.last
         
@@ -169,6 +183,8 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
     }
     
     @IBAction func MoveButton(_ sender: UIButton) {
+        locationManager.stopMonitoringSignificantLocationChanges()
+        locationManager.stopUpdatingLocation()
         self.performSegue(withIdentifier: "goToNextPage", sender: self)
     }
    
@@ -176,9 +192,9 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
             if segue.identifier == "goToNextPage"
             {
             let destination = segue.destination as! SecondScreen
-                destination.Title = Title
-                destination.Duration = Duration
-                destination.Distance = Distance
+                destination.Title = Title.self
+                destination.Duration = Duration.self
+                destination.Distance = Distance.self
             }
         }
 

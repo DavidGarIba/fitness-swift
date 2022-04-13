@@ -13,11 +13,11 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var searchTextfield: UITextField!
     @IBOutlet weak var weatherInfor: UILabel!
     @IBOutlet weak var iconTemp: UIImageView!
     @IBOutlet weak var iconCond: UIImageView!
-    @IBOutlet weak var iconLoca: UIImageView!
+    @IBOutlet weak var StartActivityButton: UIButton!
+    
     
     
     let locationManager = CLLocationManager()
@@ -27,7 +27,7 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        StartActivityButton.isEnabled = false
         locationManager.delegate = self
         
         let config = UIImage.SymbolConfiguration(paletteColors: [.systemBlue, .systemYellow, .systemTeal])
@@ -35,8 +35,7 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
         self.iconTemp.image = UIImage(systemName: "thermometer")
         self.iconCond.preferredSymbolConfiguration = config
         self.iconCond.image = UIImage(systemName: "globe.americas")
-        self.iconLoca.preferredSymbolConfiguration = config
-        self.iconLoca.image = UIImage(systemName: "location.viewfinder")
+    
     }
     
 
@@ -46,11 +45,11 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBAction func onSearchTapped(_ sender: UIButton) {
-        searchTextfield.endEditing(true)
-        getWeather(search: searchTextfield.text)
-        
-    }
+//    @IBAction func onSearchTapped(_ sender: UIButton) {
+//        searchTextfield.endEditing(true)
+//        getWeather(search: searchTextfield.text)
+//
+//    }
     @IBAction func startActivityButton(_ sender: UIButton) {
         self.performSegue(withIdentifier: "goToNextPage", sender: self)
         
@@ -269,6 +268,7 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onGetLocationTapped(_ sender: UIButton) {
+        StartActivityButton.isEnabled = true
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
     }
@@ -304,7 +304,6 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
                 print(location.location.name)
                 DispatchQueue.main.async {
                     self.locationLabel.text = location.location.name
-                    self.searchTextfield.text = location.location.name
                 }
                 self.getWeather(search: location.location.name)
                 }

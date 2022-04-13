@@ -28,8 +28,9 @@ class SecondScreen: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        addDataToItems()
         readRecordActivity()
+        addDataToItems()
+        
     }
     
     
@@ -68,6 +69,7 @@ class SecondScreen: UIViewController {
         }
     }
 
+    
     
     func addDataToItems(){
         guard let newTitle = Title else {
