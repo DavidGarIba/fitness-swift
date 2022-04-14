@@ -38,6 +38,16 @@ class ThirdScreen: UIViewController, UITextFieldDelegate {
     
     }
     
+    // screen is locked in portrait
+    override open var shouldAutorotate: Bool {
+       return false
+    }
+
+    // Specify the orientation.
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+       return .portrait
+    }
+    
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

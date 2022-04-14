@@ -52,6 +52,16 @@ class FourScreen: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate
         setupMap()
     }
     
+    // screen is locked in portrait
+    override open var shouldAutorotate: Bool {
+       return false
+    }
+
+    // Specify the orientation.
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+       return .portrait
+    }
+    
     private func setupMap() {
         // set delegate
         mapView.delegate = self

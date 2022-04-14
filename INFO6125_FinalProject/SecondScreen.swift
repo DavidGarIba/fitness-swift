@@ -33,6 +33,16 @@ class SecondScreen: UIViewController {
         
     }
     
+    // screen is locked in portrait
+    override open var shouldAutorotate: Bool {
+       return false
+    }
+
+    // Specify the orientation.
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+       return .portrait
+    }
+    
     
     @IBAction func LogoutButton(_ sender: UIBarButtonItem) {
         
@@ -91,7 +101,7 @@ class SecondScreen: UIViewController {
         }
         if Duration != nil && Distance != nil && Title != nil
         {
-            items.append(ItemToDo(title:"\(newTitle)", description: "The archived road is \(newDistance)" + " " + "in duration is \(newDuration)"))
+            items.append(ItemToDo(title:"\(newTitle)", description: "Distance: \(newDistance)" + " " + "Duration: \(newDuration)"))
             Distance = nil
             Duration = nil
             Title = nil

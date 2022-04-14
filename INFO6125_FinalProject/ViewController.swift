@@ -15,22 +15,44 @@ class ViewController: UIViewController {
     @IBOutlet weak var LoginButton: UIButton!
     @IBOutlet weak var IssueLabel: UILabel!
     
+    @IBOutlet weak var EmailNewTextField: UITextField!
+    @IBOutlet weak var PasswordNewTextField: UITextField!
+    @IBOutlet weak var SigninButton: UIButton!
+    @IBOutlet weak var IssueLabel2: UILabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         LoginButton.isEnabled = false
+        SigninButton.isEnabled = false
+        IssueLabel.isHidden = true
+        IssueLabel2.isHidden = true
+        
        
+    }
+    
+    // screen is locked in portrait
+    override open var shouldAutorotate: Bool {
+       return false
+    }
+
+    // Specify the orientation.
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+       return .portrait
     }
     
     @IBAction func EmailTextField(_ sender: UITextField) {
         if sender.text?.isEmpty == true
         {
             LoginButton.isEnabled = false
+            IssueLabel.isHidden = false
             IssueLabel.text = "Email is empty"
         }
         else if sender.text?.isEmpty == false && PasswordTextField.text?.isEmpty == false
         {
+            IssueLabel.isHidden = true
             LoginButton.isEnabled = true
         }
     }
@@ -40,11 +62,41 @@ class ViewController: UIViewController {
         if sender.text?.isEmpty == true
         {
             LoginButton.isEnabled = false
-            IssueLabel.text = "Email is empty"
+            IssueLabel.isHidden = false
+            IssueLabel.text = "Password is empty"
         }
         else if sender.text?.isEmpty == false && EmailTextField.text?.isEmpty == false
         {
+            IssueLabel.isHidden = true
             LoginButton.isEnabled = true
+        }
+    }
+    
+    @IBAction func EmailNewTextChanged(_ sender: UITextField) {
+        if sender.text?.isEmpty == true
+        {
+            SigninButton.isEnabled = false
+            IssueLabel2.isHidden = false
+            IssueLabel2.text = "Email is empty"
+        }
+        else if sender.text?.isEmpty == false && PasswordNewTextField.text?.isEmpty == false
+        {
+            IssueLabel2.isHidden = true
+            SigninButton.isEnabled = true
+        }
+    }
+    
+    @IBAction func PasswordNewTextChanged(_ sender: UITextField) {
+        if sender.text?.isEmpty == true
+        {
+            SigninButton.isEnabled = false
+            IssueLabel2.isHidden = false
+            IssueLabel2.text = "Password is empty"
+        }
+        else if sender.text?.isEmpty == false && EmailNewTextField.text?.isEmpty == false
+        {
+            IssueLabel2.isHidden = true
+            SigninButton.isEnabled = true
         }
     }
     
@@ -73,6 +125,25 @@ class ViewController: UIViewController {
                             strongSelf.userIdentifier = authResult?.user.email
                             strongSelf.performSegue(withIdentifier: strongSelf.welcomeSegue, sender: strongSelf)
                     }
+    }
+    
+    
+    
+    
+    @IBAction func SignInButtonTapped(_ sender: UIButton) {
+        let email = EmailNewTextField.text ?? ""
+        let password = PasswordNewTextField.text ?? ""
+        
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if error == nil && authResult != nil {
+                            print("User created!")
+                            
+                        } else {
+                            guard let message = error?.localizedDescription else { return }
+                            print(error)
+                            
+                        }
+        }
     }
     
     func showUIAlert (setence : String){
