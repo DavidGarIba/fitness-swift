@@ -136,11 +136,11 @@ class ViewController: UIViewController {
         
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if error == nil && authResult != nil {
-                            print("User created!")
+                self.showUIAlert(setence: "New user created")
                             
                         } else {
                             guard let message = error?.localizedDescription else { return }
-                            print(error)
+                            self.showUIAlert(setence: "Error while created new user")
                             
                         }
         }
